@@ -1,6 +1,6 @@
 {
   "name": "chromelogger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Implementation of the Chrome Logger protocol for Node.js",
   "keywords": ["chrome", "logger", "logging", "debugging", "express","middleware"],
   "main": "./lib/chromelogger.js",
