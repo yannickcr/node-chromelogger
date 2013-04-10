@@ -6,6 +6,7 @@ Implementation of the Chrome Logger protocol for Node.js
 
 ```shell
 npm install chromelogger
+```
 
 and install the [Chrome Logger extension](http://craig.is/writing/chrome-logger) in your Chrome browser.
 
@@ -31,6 +32,7 @@ server.on('request', function(req, res) {
 });
 
 server.listen(7357);
+```
 
 # License
 
