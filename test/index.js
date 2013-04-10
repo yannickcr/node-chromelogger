@@ -1,18 +1,4 @@
-# Node Chrome Logger
-
-Implementation of the Chrome Logger protocol for Node.js
-
-# Installation
-
-```shell
-npm install chromelogger
-
-and install the [Chrome Logger extension](http://craig.is/writing/chrome-logger) in your Chrome browser.
-
-# Usage
-
-```javascript
-var chromelogger = require('chromelogger');
+var chromelogger = require('../lib/chromelogger');
 var http = require('http');
 
 var server = http.createServer();
@@ -28,10 +14,11 @@ server.on('request', function(req, res) {
   res.groupEnd('GroupEnd from ChromeLogger');
   res.groupCollapsed('GroupCollapsed from ChromeLogger');
   res.end('Hello World');
+  res.log('Fail from ChromeLogger');
+});
+
+chromelogger.on('error', function(message) {
+  console.log(message);
 });
 
 server.listen(7357);
-
-# License
-
-MIT
