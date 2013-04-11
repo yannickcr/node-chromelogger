@@ -62,7 +62,7 @@ app.listen(7357);
 
 There are different events that the Node Chrome Logger module can emits.
 
-`error`: if an error occur (ploblem during JSON serialization, logging after the headers were already sent)
+`error`: if an error occur (problem during JSON serialization, logging after the headers were already sent)
 
 ```javascript
 chromelogger.on('error', function(message) {
