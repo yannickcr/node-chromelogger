@@ -22,7 +22,7 @@ var server = http.createServer();
 server.on('request', chromelogger.middleware);
 
 server.on('request', function(req, res) {
-  res.log('Log from ChromeLogger');
+  res.log('Message from Node.js %s', process.version);
   res.end('Hello World');
 });
 
@@ -43,7 +43,7 @@ These methods matches the [Console API of the Chrome Developer Tools](https://de
 ## Usage as an Express middleware
 
 ```javascript
-var chromelogger = require('../lib/chromelogger');
+var chromelogger = require('chromelogger');
 var express = require('express');
 
 var app = express();
@@ -51,7 +51,7 @@ var app = express();
 app.use(chromelogger.middleware);
 
 app.get('/', function(req, res) {
-  res.log('Log from ChromeLogger');
+  res.log('Message from Express.js %s', express.version);
   res.end('Hello World');
 });
 
