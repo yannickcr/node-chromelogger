@@ -239,15 +239,41 @@ describe('logging', function(){
 
   });
 
+  // Headers too big
+  it('must throw an error when the headers are too big', function(){
+
+    var limit = (240 * 1024) - res._headers['x-chromelogger-data'].length;
+    var filler = new Array(limit).join('A'); // Create a big string to fill the headers
+
+    assert.throws(
+      function() {
+        res.log(filler);
+      },
+      function(err) {
+        if (/You can\'t log more than 245760 Bytes of data in the headers/.test(err.message)) {
+          return true;
+        }
+      }
+    );
+
+  });
+
   // Headers already sent
   it('must throw an error when the headers was already sent', function(){
 
     res._header = res._header || true; // Hack related to Node.js internals
     res.end();
 
-    assert.throws(function() {
+    assert.throws(
+      function() {
         res.log('Attempt to log when the headers were already sent');
-    });
+      },
+      function(err) {
+        if (/headers were already sent/.test(err.message)) {
+          return true;
+        }
+      }
+    );
 
   });
 
