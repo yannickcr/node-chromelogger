@@ -1,6 +1,6 @@
 {
   "name": "chromelogger",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Log and inspect your server-side code in the Chrome console using Chrome Logger",
   "keywords": ["chrome", "logger", "logging", "debugging", "express","middleware"],
   "main": "./lib/chromelogger.js",
