@@ -4,6 +4,12 @@
   "description": "Log and inspect your server-side code in the Chrome console using Chrome Logger",
   "keywords": ["chrome", "logger", "logging", "debugging", "express","middleware"],
   "main": "./lib/chromelogger.js",
+  "scripts": {
+    "test": "mocha ./test/test.js"
+  },
+  "devDependencies": {
+    "mocha": "1.9.x"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/yannickcr/node-chromelogger.git"

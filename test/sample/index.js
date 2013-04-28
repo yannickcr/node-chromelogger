@@ -1,11 +1,11 @@
-var chromelogger = require('../lib/chromelogger');
-var express = require('express');
+var chromelogger = require('../../lib/chromelogger');
+var http = require('http');
 
-var app = express();
+var server = http.createServer();
 
-app.use(chromelogger.middleware);
+server.on('request', chromelogger.middleware);
 
-app.get('/', function(req, res) {
+server.on('request', function(req, res) {
   res.log('Simple message');
   res.log('Message', 'with', 4, 'parameters');
   res.log('Message from Node.js %s', process.version);
@@ -30,4 +30,4 @@ chromelogger.on('error', function(message) {
   console.log(message);
 });
 
-app.listen(7357);
+server.listen(7357);
