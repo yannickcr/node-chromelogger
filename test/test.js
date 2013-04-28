@@ -105,7 +105,7 @@ describe('logging', function(){
 
     assert.equal(typeof data.version, 'string');
     assert.equal(data.version, config.version);
-    assert.notStrictEqual(data.version.match(verReg), null, 'the version must match ' + verReg);
+    assert(verReg.test(data.version), 'the version must match ' + verReg);
 
   });
 
@@ -130,7 +130,7 @@ describe('logging', function(){
     assert.equal(message[0][0], 'Simple message');
 
     assert.equal(typeof message[1], 'string');
-    assert.notStrictEqual(message[1].match(lineReg), null, 'the error line must match' + lineReg);
+    assert(lineReg.test(message[1]), 'the error line must match' + lineReg);
 
     assert.equal(typeof message[2], 'string');
     assert.strictEqual(message[2], '');
@@ -168,8 +168,8 @@ describe('logging', function(){
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
-    assert.deepEqual(message[0][0], 'Message with an Object');
-    assert.deepEqual(message[0][1].___class_name, 'ChromeLogger');
+    assert.equal(message[0][0], 'Message with an Object');
+    assert.equal(message[0][1].___class_name, 'ChromeLogger');
 
   });
 
@@ -180,7 +180,7 @@ describe('logging', function(){
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
-    assert.deepEqual(message[2], 'warn');
+    assert.equal(message[2], 'warn');
 
   });
 
@@ -191,7 +191,7 @@ describe('logging', function(){
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
-    assert.deepEqual(message[2], 'error');
+    assert.equal(message[2], 'error');
 
   });
 
@@ -202,7 +202,7 @@ describe('logging', function(){
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
-    assert.deepEqual(message[2], 'info');
+    assert.equal(message[2], 'info');
 
   });
 
@@ -213,7 +213,8 @@ describe('logging', function(){
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
-    assert.deepEqual(message[2], 'group');
+    assert.equal(message[1], null, 'the group messages must not have a backtrace');
+    assert.equal(message[2], 'group');
 
   });
 
@@ -224,7 +225,8 @@ describe('logging', function(){
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
-    assert.deepEqual(message[2], 'groupEnd');
+    assert.equal(message[1], null, 'the groupEnd messages must not have a backtrace');
+    assert.equal(message[2], 'groupEnd');
 
   });
 
@@ -235,7 +237,25 @@ describe('logging', function(){
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
-    assert.deepEqual(message[2], 'groupCollapsed');
+    assert.equal(message[1], null, 'the groupCollapsed messages must not have a backtrace');
+    assert.equal(message[2], 'groupCollapsed');
+
+  });
+
+  // Log in a loop
+  it('must set a backtrace for only the first log message in a loop', function(){
+
+    var lineReg = /node-chromelogger\/test\/test\.js:[0-9]+:[0-9]+$/;
+
+    for(var i = 0; i < 2; i++) {
+      res.log('Test');
+    }
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message2 = data.rows.pop();
+    var message1 = data.rows.pop();
+    assert(lineReg.test(message1[1]), 'the first log message in a loop must have a backtrace');
+    assert.equal(message2[1], null, 'the second log message in a loop must not have a backtrace');
 
   });
 
