@@ -17,32 +17,36 @@ describe('middleware', function(){
 
   describe('must set', function(){
 
+    it('a chrome object', function(){
+      assert.equal(typeof res.chrome, 'object', 'res.chrome missing');
+    });
+
     it('a log function', function(){
-      assert.equal(typeof res.log, 'function', 'res.log missing');
+      assert.equal(typeof res.chrome.log, 'function', 'res.chrome.log missing');
     });
 
     it('a warn function', function(){
-      assert.equal(typeof res.warn, 'function', 'res.warn missing');
+      assert.equal(typeof res.chrome.warn, 'function', 'res.chrome.warn missing');
     });
 
     it('an error function', function(){
-      assert.equal(typeof res.error, 'function', 'res.error missing');
+      assert.equal(typeof res.chrome.error, 'function', 'res.chrome.error missing');
     });
 
     it('an info function', function(){
-      assert.equal(typeof res.info, 'function', 'res.info missing');
+      assert.equal(typeof res.chrome.info, 'function', 'res.chrome.info missing');
     });
 
     it('a group function', function(){
-      assert.equal(typeof res.group, 'function', 'res.group missing');
+      assert.equal(typeof res.chrome.group, 'function', 'res.chrome.group missing');
     });
 
     it('a groupEnd function', function(){
-      assert.equal(typeof res.groupEnd, 'function', 'res.groupEnd missing');
+      assert.equal(typeof res.chrome.groupEnd, 'function', 'res.chrome.groupEnd missing');
     });
 
     it('a groupCollapsed function', function(){
-      assert.equal(typeof res.groupCollapsed, 'function', 'res.groupCollapsed missing');
+      assert.equal(typeof res.chrome.groupCollapsed, 'function', 'res.chrome.groupCollapsed missing');
     });
 
   });
@@ -74,10 +78,11 @@ describe('logging', function(){
    * Testing simple message logging and message structure
    */
 
-  // Log a message
-  res.log('Simple message');
-
   it('must set the x-chromelogger-data header', function(){
+
+    // Log a message
+    res.chrome.log('Simple message');
+
     assert.equal(typeof res._headers['x-chromelogger-data'], 'string', 'the x-chromelogger-data header is not set');
   });
 
@@ -144,7 +149,7 @@ describe('logging', function(){
   // Log
   it('must log a message with 4 parameters', function(){
 
-    res.log('Message', 'with', 4, 'parameters');
+    res.chrome.log('Message', 'with', 4, 'parameters');
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -154,7 +159,7 @@ describe('logging', function(){
 
   it('must log a message with a dynamic parameter', function(){
 
-    res.log('Message from Node.js %s', process.version);
+    res.chrome.log('Message from Node.js %s', process.version);
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -164,7 +169,7 @@ describe('logging', function(){
 
   it('must log a message with an Object', function(){
 
-    res.log('Message with an Object', chromelogger);
+    res.chrome.log('Message with an Object', chromelogger);
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -176,7 +181,7 @@ describe('logging', function(){
   // Warn
   it('must log a warning', function(){
 
-    res.warn('Warning message');
+    res.chrome.warn('Warning message');
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -187,7 +192,7 @@ describe('logging', function(){
   // Error
   it('must log an error', function(){
 
-    res.error('Error message');
+    res.chrome.error('Error message');
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -198,7 +203,7 @@ describe('logging', function(){
   // Info
   it('must log an info', function(){
 
-    res.info('Info message');
+    res.chrome.info('Info message');
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -209,7 +214,7 @@ describe('logging', function(){
   // Group
   it('must start a grouped message', function(){
 
-    res.group('Grouped messages');
+    res.chrome.group('Grouped messages');
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -221,7 +226,7 @@ describe('logging', function(){
   // GroupEnd
   it('must end a grouped message', function(){
 
-    res.groupEnd();
+    res.chrome.groupEnd();
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -233,7 +238,7 @@ describe('logging', function(){
   // groupCollapsed
   it('must start a grouped message (collapsed)', function(){
 
-    res.groupCollapsed('Grouped messages (collapsed)');
+    res.chrome.groupCollapsed('Grouped messages (collapsed)');
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
@@ -248,7 +253,7 @@ describe('logging', function(){
     var lineReg = /node-chromelogger\/test\/test\.js:[0-9]+:[0-9]+$/;
 
     for(var i = 0; i < 2; i++) {
-      res.log('Test');
+      res.chrome.log('Test');
     }
 
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
@@ -267,7 +272,7 @@ describe('logging', function(){
 
     assert.throws(
       function() {
-        res.log(filler);
+        res.chrome.log(filler);
       },
       function(err) {
         if (/You can\'t log more than 245760 Bytes of data in the headers/.test(err.message)) {
@@ -286,7 +291,7 @@ describe('logging', function(){
 
     assert.throws(
       function() {
-        res.log('Attempt to log when the headers were already sent');
+        res.chrome.log('Attempt to log when the headers were already sent');
       },
       function(err) {
         if (/headers were already sent/.test(err.message)) {

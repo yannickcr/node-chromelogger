@@ -22,7 +22,7 @@ var server = http.createServer();
 server.on('request', chromelogger.middleware);
 
 server.on('request', function(req, res) {
-  res.log('Message from Node.js %s', process.version);
+  res.chrome.log('Message from Node.js %s', process.version);
   res.end('Hello World');
 });
 
@@ -30,13 +30,13 @@ server.listen(7357);
 ```
 
 Node Chrome Logger provide several logging methods on the ServerResponse (res) object:
- * `res.log`
- * `res.warn`
- * `res.error`
- * `res.info`
- * `res.group`
- * `res.groupEnd`
- * `res.groupCollapse`
+ * `res.chrome.log`
+ * `res.chrome.warn`
+ * `res.chrome.error`
+ * `res.chrome.info`
+ * `res.chrome.group`
+ * `res.chrome.groupEnd`
+ * `res.chrome.groupCollapse`
 
 These methods matches the [Console API of the Chrome Developer Tools](https://developers.google.com/chrome-developer-tools/docs/console-api).
 
@@ -51,7 +51,7 @@ var app = express();
 app.use(chromelogger.middleware);
 
 app.get('/', function(req, res) {
-  res.log('Message from Express.js %s', express.version);
+  res.chrome.log('Message from Express.js %s', express.version);
   res.end('Hello World');
 });
 
@@ -60,9 +60,7 @@ app.listen(7357);
 
 # Events
 
-There are different events that the Node Chrome Logger module can emits.
-
-`error`: if an error occur (problem during JSON serialization, logging after the headers were already sent)
+`error`: if an error occur (problem during JSON serialization, logging after the headers were already sent, etc.)
 
 ```javascript
 chromelogger.on('error', function(message) {
@@ -72,4 +70,4 @@ chromelogger.on('error', function(message) {
 
 # License
 
-MIT
+Node Chrome Logger is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
