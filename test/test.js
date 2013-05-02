@@ -59,14 +59,6 @@ describe('middleware', function(){
 
   });
 
-  describe('must execute', function(){
-
-    it('next function', function(){
-      assert.equal(nextExecuted, true, 'next function not executed');
-    });
-
-  });
-
 });
 
 /*
