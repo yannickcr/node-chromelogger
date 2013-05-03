@@ -1,5 +1,10 @@
 # Node Chrome Logger Changelog
 
+## 1.0.2
+(05/03/2013)
+- Add support for objects with circular references
+- Add Gemnasium badge in README
+
 ## 1.0.1
 (04/28/2013)
 - Add travis configuration
@@ -21,7 +26,7 @@
 ## 0.0.4
 (04/11/2013)
 - Add support for logging with multiple arguments
-- Log the serialization errors on the client 
+- Log the serialization errors on the client
 
 ## 0.0.3
 (04/10/2013)
