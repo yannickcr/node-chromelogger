@@ -10,6 +10,9 @@
   "devDependencies": {
     "mocha": "1.9.x"
   },
+  "engines": {
+    "node": ">=0.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/yannickcr/node-chromelogger.git"
