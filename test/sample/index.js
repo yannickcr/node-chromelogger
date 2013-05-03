@@ -10,6 +10,7 @@ server.on('request', function(req, res) {
   res.chrome.log('Message', 'with', 4, 'parameters');
   res.chrome.log('Message from Node.js %s', process.version);
   res.chrome.log('Message with an Object', chromelogger);
+  res.chrome.log('Message with an Object and a circular reference', req);
   res.chrome.warn('Warning message');
   res.chrome.error('Error message');
   res.chrome.info('Info message');
@@ -22,7 +23,7 @@ server.on('request', function(req, res) {
   res.chrome.log('Message 2');
   res.chrome.groupEnd();
   res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
-  res.end(JSON.stringify(res._ChromeLoggerData));
+  res.end();
   res.chrome.log('Attempt to log when the headers were already sent');
 });
 

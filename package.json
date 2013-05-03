@@ -7,6 +7,9 @@
   "scripts": {
     "test": "mocha ./test/test.js"
   },
+  "dependencies": {
+    "json-stringify-safe": "4.0.x"
+  },
   "devDependencies": {
     "mocha": "1.9.x"
   },

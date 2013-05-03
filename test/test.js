@@ -170,6 +170,17 @@ describe('logging', function(){
 
   });
 
+  it('must log a message with an Object which contains a circular reference', function(){
+
+    res.chrome.log('Message with an Object and a circular reference', res);
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert.equal(message[0][0], 'Message with an Object and a circular reference');
+    assert.equal(message[0][1].___class_name, 'OutgoingMessage');
+
+  });
+
   // Warn
   it('must log a warning', function(){
 
