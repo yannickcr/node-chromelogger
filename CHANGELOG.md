@@ -1,4 +1,4 @@
-1.0.2 / 2013-05-03 
+1.0.2 / 2013-05-03
 ==================
 
   * add support for objects with circular references
@@ -16,7 +16,7 @@
   * limit log size to 240KB
   * improve errors
   * remove backtrace for group, groupEnd and groupCollapsed messages
-  * remove multiple backtraces for if we log in a loop
+  * remove multiple backtraces if we log in a loop
   * API change: all logging functions are now in res.chrome
 
 0.0.5 / 2013-04-28

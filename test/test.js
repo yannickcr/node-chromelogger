@@ -292,6 +292,7 @@ describe('logging', function(){
 
     it('must remove the last header from the queue', function(){
 
+      // Warning: use a private property
       var message = res._ChromeLoggerData.rows[res._ChromeLoggerData.rows.length - 1][0][0];
       assert.notEqual(filler, message);
 
