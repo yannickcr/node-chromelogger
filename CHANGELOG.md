@@ -1,3 +1,10 @@
+1.0.3 / 2013-06-08
+==================
+
+  * fix deletion of too large headers
+  * update json-stringify-safe and mocha to latest versions
+  * add Coveralls badge in README
+
 1.0.2 / 2013-05-03
 ==================
 
