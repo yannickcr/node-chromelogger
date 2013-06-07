@@ -2,16 +2,29 @@
   "name": "chromelogger",
   "version": "1.0.2",
   "description": "Log and inspect your server-side code in the Chrome console using Chrome Logger",
-  "keywords": ["chrome", "logger", "logging", "debugging", "express","middleware"],
+  "keywords": [
+    "chrome",
+    "logger",
+    "logging",
+    "debugging",
+    "express",
+    "middleware"
+  ],
   "main": "./lib/chromelogger.js",
   "scripts": {
-    "test": "mocha ./test/test.js"
+    "test": "./node_modules/mocha/bin/mocha ./test/test.js",
+    "blanket": {
+     "pattern": [ "/lib/chromelogger.js" ]
+    }
   },
   "dependencies": {
     "json-stringify-safe": "4.0.x"
   },
   "devDependencies": {
-    "mocha": "1.9.x"
+    "mocha": "1.9.x",
+    "mocha-lcov-reporter": "0.0.x",
+    "blanket": "1.1.x",
+    "coveralls": "2.0.x"
   },
   "engines": {
     "node": ">=0.4.0"
@@ -21,9 +34,11 @@
     "url": "git://github.com/yannickcr/node-chromelogger.git"
   },
   "author": "Yannick Croissant (https://github.com/yannickcr)",
-  "licenses": [ {
-    "type": "MIT",
-    "url" : "https://raw.github.com/yannickcr/node-chromelogger/master/LICENSE"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/yannickcr/node-chromelogger/master/LICENSE"
+    }
+  ],
   "readmeFilename": "README.md"
 }
