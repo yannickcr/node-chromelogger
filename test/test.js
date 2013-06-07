@@ -268,40 +268,67 @@ describe('logging', function(){
   });
 
   // Headers too big
-  it('must throw an error when the headers are too big', function(){
+  describe('when the headers are too big', function(){
 
-    var limit = (240 * 1024) - res._headers['x-chromelogger-data'].length;
-    var filler = new Array(limit).join('A'); // Create a big string to fill the headers
+    var limit, filler;
 
-    assert.throws(
-      function() {
-        res.chrome.log(filler);
-      },
-      function(err) {
-        if (/You can\'t log more than 245760 Bytes of data in the headers/.test(err.message)) {
-          return true;
+    it('must throw an error', function(){
+
+      limit = (240 * 1024) - res._headers['x-chromelogger-data'].length;
+      filler = new Array(limit).join('A'); // Create a big string to fill the headers
+
+      assert.throws(
+        function() {
+          res.chrome.log(filler);
+        },
+        function(err) {
+          if (/You can\'t log more than 245760 Bytes of data in the headers/.test(err.message)) {
+            return true;
+          }
         }
-      }
-    );
+      );
+
+    });
+
+    it('must remove the last header from the queue', function(){
+
+      var message = res._ChromeLoggerData.rows[res._ChromeLoggerData.rows.length - 1][0][0];
+      assert.notEqual(filler, message);
+
+    });
+
+    it('must be able to add another header', function(){
+
+      assert.doesNotThrow(
+        function() {
+          res.chrome.log('Test');
+        }
+      );
+
+    });
 
   });
 
-  // Headers already sent
-  it('must throw an error when the headers was already sent', function(){
+  describe('when the headers was already sent', function(){
 
-    res._header = res._header || true; // Hack related to Node.js internals
-    res.end();
+    // Headers already sent
+    it('must throw an error', function(){
 
-    assert.throws(
-      function() {
-        res.chrome.log('Attempt to log when the headers were already sent');
-      },
-      function(err) {
-        if (/headers were already sent/.test(err.message)) {
-          return true;
+      res._header = res._header || true; // Hack related to Node.js internals
+      res.end();
+
+      assert.throws(
+        function() {
+          res.chrome.log('Attempt to log when the headers were already sent');
+        },
+        function(err) {
+          if (/headers were already sent/.test(err.message)) {
+            return true;
+          }
         }
-      }
-    );
+      );
+
+    });
 
   });
 
