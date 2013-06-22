@@ -21,7 +21,7 @@
     "json-stringify-safe": "5.0.x"
   },
   "devDependencies": {
-    "mocha": "1.10.x",
+    "mocha": "1.11.x",
     "mocha-lcov-reporter": "0.0.x",
     "blanket": "1.1.x",
     "coveralls": "2.0.x"
