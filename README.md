@@ -60,7 +60,7 @@ app.listen(7357);
 
 # Events
 
-`error`: if an error occur (problem during JSON serialization, logging after the headers were already sent, etc.)
+`error`: if an error occur (headers too large, logging after the headers were already sent)
 
 ```javascript
 chromelogger.on('error', function(message) {
