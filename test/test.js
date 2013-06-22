@@ -10,50 +10,50 @@ var res = new OutgoingMessage();
 /*
  * Testing the middleware execution
  */
-describe('middleware', function(){
+describe('middleware', function() {
 
   var nextExecuted = false;
-  chromelogger.middleware(null, res, function(){ nextExecuted = true; });
+  chromelogger.middleware(null, res, function() { nextExecuted = true; });
 
-  describe('must set', function(){
+  describe('must set', function() {
 
-    it('a chrome object', function(){
+    it('a chrome object', function() {
       assert.equal(typeof res.chrome, 'object', 'res.chrome missing');
     });
 
-    it('a log function', function(){
+    it('a log function', function() {
       assert.equal(typeof res.chrome.log, 'function', 'res.chrome.log missing');
     });
 
-    it('a warn function', function(){
+    it('a warn function', function() {
       assert.equal(typeof res.chrome.warn, 'function', 'res.chrome.warn missing');
     });
 
-    it('an error function', function(){
+    it('an error function', function() {
       assert.equal(typeof res.chrome.error, 'function', 'res.chrome.error missing');
     });
 
-    it('an info function', function(){
+    it('an info function', function() {
       assert.equal(typeof res.chrome.info, 'function', 'res.chrome.info missing');
     });
 
-    it('a group function', function(){
+    it('a group function', function() {
       assert.equal(typeof res.chrome.group, 'function', 'res.chrome.group missing');
     });
 
-    it('a groupEnd function', function(){
+    it('a groupEnd function', function() {
       assert.equal(typeof res.chrome.groupEnd, 'function', 'res.chrome.groupEnd missing');
     });
 
-    it('a groupCollapsed function', function(){
+    it('a groupCollapsed function', function() {
       assert.equal(typeof res.chrome.groupCollapsed, 'function', 'res.chrome.groupCollapsed missing');
     });
 
   });
 
-  describe('must execute', function(){
+  describe('must execute', function() {
 
-    it('next function', function(){
+    it('next function', function() {
       assert.equal(nextExecuted, true, 'next function not executed');
     });
 
@@ -64,13 +64,13 @@ describe('middleware', function(){
 /*
  * Testing the logging functions
  */
-describe('logging', function(){
+describe('logging', function() {
 
   /*
    * Testing simple message logging and message structure
    */
 
-  it('must set the x-chromelogger-data header', function(){
+  it('must set the x-chromelogger-data header', function() {
 
     // Log a message
     res.chrome.log('Simple message');
@@ -80,7 +80,7 @@ describe('logging', function(){
 
   // Retrieve the message
   var data;
-  it('must decode the x-chromelogger-data header', function(){
+  it('must decode the x-chromelogger-data header', function() {
 
     assert.doesNotThrow(function() {
       data = new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii');
@@ -88,7 +88,7 @@ describe('logging', function(){
 
   });
 
-  it('must parse the x-chromelogger-data header', function(){
+  it('must parse the x-chromelogger-data header', function() {
 
     assert.doesNotThrow(function() {
       data = JSON.parse(data);
@@ -96,7 +96,7 @@ describe('logging', function(){
 
   });
 
-  it('must set the version', function(){
+  it('must set the version', function() {
 
     var verReg = /[0-9]+\.[0-9]+\.[0-9]+/;
 
@@ -106,14 +106,14 @@ describe('logging', function(){
 
   });
 
-  it('must set the columns', function(){
+  it('must set the columns', function() {
 
     assert.equal(typeof data.columns, 'object');
     assert.deepEqual(data.columns, ['log', 'backtrace', 'type']);
 
   });
 
-  it('must set the rows', function(){
+  it('must set the rows', function() {
 
     var lineReg = /node-chromelogger\/test\/test\.js:[0-9]+:[0-9]+$/;
 
@@ -139,7 +139,7 @@ describe('logging', function(){
    */
 
   // Log
-  it('must log a message with 4 parameters', function(){
+  it('must log a message with 4 parameters', function() {
 
     res.chrome.log('Message', 'with', 4, 'parameters');
 
@@ -149,7 +149,7 @@ describe('logging', function(){
 
   });
 
-  it('must log a message with a dynamic parameter', function(){
+  it('must log a message with a dynamic parameter', function() {
 
     res.chrome.log('Message from Node.js %s', process.version);
 
@@ -159,7 +159,7 @@ describe('logging', function(){
 
   });
 
-  it('must log a message with an Object', function(){
+  it('must log a message with an Object', function() {
 
     res.chrome.log('Message with an Object', chromelogger);
 
@@ -170,7 +170,7 @@ describe('logging', function(){
 
   });
 
-  it('must log a message with an Object which contains a circular reference', function(){
+  it('must log a message with an Object which contains a circular reference', function() {
 
     res.chrome.log('Message with an Object and a circular reference', res);
 
@@ -182,7 +182,7 @@ describe('logging', function(){
   });
 
   // Warn
-  it('must log a warning', function(){
+  it('must log a warning', function() {
 
     res.chrome.warn('Warning message');
 
@@ -193,7 +193,7 @@ describe('logging', function(){
   });
 
   // Error
-  it('must log an error', function(){
+  it('must log an error', function() {
 
     res.chrome.error('Error message');
 
@@ -204,7 +204,7 @@ describe('logging', function(){
   });
 
   // Info
-  it('must log an info', function(){
+  it('must log an info', function() {
 
     res.chrome.info('Info message');
 
@@ -215,7 +215,7 @@ describe('logging', function(){
   });
 
   // Group
-  it('must start a grouped message', function(){
+  it('must start a grouped message', function() {
 
     res.chrome.group('Grouped messages');
 
@@ -227,7 +227,7 @@ describe('logging', function(){
   });
 
   // GroupEnd
-  it('must end a grouped message', function(){
+  it('must end a grouped message', function() {
 
     res.chrome.groupEnd();
 
@@ -239,7 +239,7 @@ describe('logging', function(){
   });
 
   // groupCollapsed
-  it('must start a grouped message (collapsed)', function(){
+  it('must start a grouped message (collapsed)', function() {
 
     res.chrome.groupCollapsed('Grouped messages (collapsed)');
 
@@ -251,7 +251,7 @@ describe('logging', function(){
   });
 
   // Log in a loop
-  it('must set a backtrace for only the first log message in a loop', function(){
+  it('must set a backtrace for only the first log message in a loop', function() {
 
     var lineReg = /node-chromelogger\/test\/test\.js:[0-9]+:[0-9]+$/;
 
@@ -268,11 +268,11 @@ describe('logging', function(){
   });
 
   // Headers too big
-  describe('when the headers are too big', function(){
+  describe('when the headers are too big', function() {
 
     var limit, filler;
 
-    it('must throw an error', function(){
+    it('must throw an error', function() {
 
       limit = (240 * 1024) - res._headers['x-chromelogger-data'].length;
       filler = new Array(limit).join('A'); // Create a big string to fill the headers
@@ -290,7 +290,7 @@ describe('logging', function(){
 
     });
 
-    it('must remove the last header from the queue', function(){
+    it('must remove the last header from the queue', function() {
 
       // Warning: use a private property
       var message = res._ChromeLoggerData.rows[res._ChromeLoggerData.rows.length - 1][0][0];
@@ -298,7 +298,7 @@ describe('logging', function(){
 
     });
 
-    it('must be able to add another header', function(){
+    it('must be able to add another header', function() {
 
       assert.doesNotThrow(
         function() {
@@ -310,10 +310,22 @@ describe('logging', function(){
 
   });
 
-  describe('when the headers was already sent', function(){
+  // Log an object with the ChromeLogger data
+  describe('when logging an object containing the ChromeLogger data', function() {
+
+    it('must replace the chromelogger data with a [Circular] string', function() {
+
+      var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+      assert.equal(data.rows[4][0][1]._headers['x-chromelogger-data'], '[Circular]');
+
+    });
+
+  });
+
+  describe('when the headers was already sent', function() {
 
     // Headers already sent
-    it('must throw an error', function(){
+    it('must throw an error', function() {
 
       res._header = res._header || true; // Hack related to Node.js internals
       res.end();
