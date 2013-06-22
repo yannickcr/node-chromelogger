@@ -1,3 +1,10 @@
+1.0.4 / 2013-06-23
+==================
+
+  * fix recursive logging of ChromeLogger data
+  * fix return on error
+  * update mocha to latest version
+
 1.0.3 / 2013-06-08
 ==================
 
