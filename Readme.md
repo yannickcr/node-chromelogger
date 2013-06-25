@@ -1,6 +1,6 @@
 # Node Chrome Logger
 
-[![Build Status](https://secure.travis-ci.org/yannickcr/node-chromelogger.png)](http://travis-ci.org/yannickcr/node-chromelogger) [![Dependency Status](https://gemnasium.com/yannickcr/node-chromelogger.png)](https://gemnasium.com/yannickcr/node-chromelogger) [![Coverage Status](https://coveralls.io/repos/yannickcr/node-chromelogger/badge.png?branch=master)](https://coveralls.io/r/yannickcr/node-chromelogger?branch=master)
+[![NPM version](https://badge.fury.io/js/chromelogger.png)](http://badge.fury.io/js/chromelogger) [![Build Status](https://secure.travis-ci.org/yannickcr/node-chromelogger.png)](http://travis-ci.org/yannickcr/node-chromelogger) [![Dependency Status](https://gemnasium.com/yannickcr/node-chromelogger.png)](https://gemnasium.com/yannickcr/node-chromelogger) [![Coverage Status](https://coveralls.io/repos/yannickcr/node-chromelogger/badge.png?branch=master)](https://coveralls.io/r/yannickcr/node-chromelogger?branch=master)
 
 [Chrome Logger](http://craig.is/writing/chrome-logger) is a Google Chrome extension for debugging server side applications in the Chrome console.
 This module is an implementation of the Chrome Logger protocol for Node.js, it allows you to log and inspect your server-side code directly in the Chrome console.
