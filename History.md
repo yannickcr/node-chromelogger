@@ -1,62 +1,69 @@
+
+1.0.5 / 2013-06-25
+==================
+
+ * add console.table support
+ * add version badge in README
+
 1.0.4 / 2013-06-23
 ==================
 
-  * fix recursive logging of ChromeLogger data
-  * fix return on error
-  * update mocha to latest version
+ * fix recursive logging of ChromeLogger data
+ * fix return on error
+ * update mocha to latest version
 
 1.0.3 / 2013-06-08
 ==================
 
-  * fix deletion of too large headers
-  * update json-stringify-safe and mocha to latest versions
-  * add Coveralls badge in README
+ * fix deletion of too large headers
+ * update json-stringify-safe and mocha to latest versions
+ * add Coveralls badge in README
 
 1.0.2 / 2013-05-03
 ==================
 
-  * add support for objects with circular references
-  * add Gemnasium badge in README
+ * add support for objects with circular references
+ * add Gemnasium badge in README
 
 1.0.1 / 2013-04-28
 ==================
 
-  * add travis configuration
-  * fixes for Node.js 0.6 and 0.8
+ * add travis configuration
+ * fixes for Node.js 0.6 and 0.8
 
 1.0.0 / 2013-04-28
 ==================
 
-  * limit log size to 240KB
-  * improve errors
-  * remove backtrace for group, groupEnd and groupCollapsed messages
-  * remove multiple backtraces if we log in a loop
-  * API change: all logging functions are now in res.chrome
+ * limit log size to 240KB
+ * improve errors
+ * remove backtrace for group, groupEnd and groupCollapsed messages
+ * remove multiple backtraces if we log in a loop
+ * API change: all logging functions are now in res.chrome
 
 0.0.5 / 2013-04-28
 ==================
 
-  * add tests
-  * small refactoring
+ * add tests
+ * small refactoring
 
 0.0.4 / 2013-04-11
 ==================
 
-  * add support for logging with multiple arguments
-  * log the serialization errors on the client
+ * add support for logging with multiple arguments
+ * log the serialization errors on the client
 
 0.0.3 / 2013-04-10
 ==================
 
-  * add Express support
-  * fix backtrace under Windows
+ * add Express support
+ * fix backtrace under Windows
 
 0.0.2 / 2013-04-10
 ==================
 
-  * add backtrace support
-  * fix version in response header
+ * add backtrace support
+ * fix version in response header
 
 0.0.1 / 2013-04-10
 ==================
-  * first revision
+ * first revision
