@@ -14,6 +14,16 @@ server.on('request', function(req, res) {
   res.chrome.warn('Warning message');
   res.chrome.error('Error message');
   res.chrome.info('Info message');
+  res.chrome.table([{
+    name:'First information',
+    message: 'First message'
+  }, {
+    name:'Second information',
+    message: 'Second message'
+  }, {
+    name:'Third information',
+    message: 'Third message'
+  }]);
   res.chrome.group('Grouped messages');
   res.chrome.log('Message 1');
   res.chrome.log('Message 2');

@@ -37,6 +37,10 @@ describe('middleware', function() {
       assert.equal(typeof res.chrome.info, 'function', 'res.chrome.info missing');
     });
 
+    it('a table function', function() {
+      assert.equal(typeof res.chrome.table, 'function', 'res.chrome.table missing');
+    });
+
     it('a group function', function() {
       assert.equal(typeof res.chrome.group, 'function', 'res.chrome.group missing');
     });
@@ -211,6 +215,28 @@ describe('logging', function() {
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
     assert.equal(message[2], 'info');
+
+  });
+
+  // Table
+  it('must log an objects table', function() {
+
+    res.chrome.table([
+      {
+        name:'First information',
+        message: 'First message'
+      }, {
+        name:'Second information',
+        message: 'Second message'
+      }, {
+        name:'Third information',
+        message: 'Third message'
+      }
+    ]);
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert.equal(message[2], 'table');
 
   });
 
