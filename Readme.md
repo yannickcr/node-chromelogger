@@ -35,6 +35,8 @@ Node Chrome Logger provide several logging methods on the ServerResponse (res) o
  * `res.chrome.error`
  * `res.chrome.info`
  * `res.chrome.table`
+ * `res.chrome.assert`
+ * `res.chrome.count`
  * `res.chrome.group`
  * `res.chrome.groupEnd`
  * `res.chrome.groupCollapse`
