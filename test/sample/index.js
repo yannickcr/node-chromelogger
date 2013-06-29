@@ -3,6 +3,8 @@ var http = require('http');
 
 var server = http.createServer();
 
+var truc = 3;
+
 server.on('request', chromelogger.middleware);
 
 server.on('request', function(req, res) {
@@ -24,6 +26,8 @@ server.on('request', function(req, res) {
     name:'Third information',
     message: 'Third message'
   }]);
+  res.chrome.assert(truc > 5, 'truc is > 5');
+  res.chrome.assert(truc < 10, 'truc is < 10');
   res.chrome.group('Grouped messages');
   res.chrome.log('Message 1');
   res.chrome.log('Message 2');

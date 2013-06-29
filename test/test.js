@@ -41,6 +41,10 @@ describe('middleware', function() {
       assert.equal(typeof res.chrome.table, 'function', 'res.chrome.table missing');
     });
 
+    it('an assert function', function() {
+      assert.equal(typeof res.chrome.assert, 'function', 'res.chrome.assert missing');
+    });
+
     it('a group function', function() {
       assert.equal(typeof res.chrome.group, 'function', 'res.chrome.group missing');
     });
@@ -237,6 +241,34 @@ describe('logging', function() {
     var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
     var message = data.rows.pop();
     assert.equal(message[2], 'table');
+
+  });
+
+  // Assert
+  it('must log a failed assertion message', function() {
+
+    var test = 3;
+
+    res.chrome.assert(test > 5, 'test is > 5');
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert.equal(message[0], 'Assertion failed: test is > 5', 'the assertion message is not properly set');
+    assert.equal(message[2], 'error');
+
+  });
+
+  it('must not log a successful assertion message', function() {
+
+    var test = 10;
+
+    res.chrome.log('Testing "test" variable value');
+    res.chrome.assert(test > 5, 'test is > 5');
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert.equal(message[0], 'Testing "test" variable value', 'a successful assertion must not be logged');
+    assert.equal(message[2], '');
 
   });
 
