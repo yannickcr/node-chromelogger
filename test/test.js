@@ -45,6 +45,10 @@ describe('middleware', function() {
       assert.equal(typeof res.chrome.assert, 'function', 'res.chrome.assert missing');
     });
 
+    it('a count function', function() {
+      assert.equal(typeof res.chrome.count, 'function', 'res.chrome.count missing');
+    });
+
     it('a group function', function() {
       assert.equal(typeof res.chrome.group, 'function', 'res.chrome.group missing');
     });
@@ -272,6 +276,36 @@ describe('logging', function() {
 
   });
 
+  // Count
+  it('must log the number of time the line has been invoked in a loop', function() {
+
+    for (var i = 0; i < 3; i++) {
+      res.chrome.count('Message in a loop');
+    }
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert.equal(message[0], 'Message in a loop: 3');
+    assert.equal(message[2], 'debug');
+
+  });
+
+  it('must log the number of time the line with different labels has been invoked in a loop', function() {
+
+    for (var i = 0; i < 3; i++) {
+      res.chrome.count('Message ' + (i % 2));
+    }
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert.equal(message[0], 'Message 0: 2');
+    assert.equal(message[2], 'debug');
+    message = data.rows.pop();
+    assert.equal(message[0], 'Message 1: 1');
+    assert.equal(message[2], 'debug');
+
+  });
+
   // Group
   it('must start a grouped message', function() {
 
@@ -351,7 +385,7 @@ describe('logging', function() {
     it('must remove the last header from the queue', function() {
 
       // Warning: use a private property
-      var message = res._ChromeLoggerData.rows[res._ChromeLoggerData.rows.length - 1][0][0];
+      var message = res._ChromeLogger.data.rows[res._ChromeLogger.data.rows.length - 1][0][0];
       assert.notEqual(filler, message);
 
     });

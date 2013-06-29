@@ -3,6 +3,8 @@ var express = require('express');
 
 var app = express();
 
+var test = 3;
+
 app.use(chromelogger.middleware);
 
 app.get('/', function(req, res) {
@@ -24,6 +26,11 @@ app.get('/', function(req, res) {
     name:'Third information',
     message: 'Third message'
   }]);
+  res.chrome.assert(test > 5, 'test is > 5');
+  res.chrome.assert(test < 10, 'test is < 10');
+  for (var i = 0; i < 2; i++) {
+    res.chrome.count('Message in a loop');
+  }
   res.chrome.group('Grouped messages');
   res.chrome.log('Message 1');
   res.chrome.log('Message 2');
