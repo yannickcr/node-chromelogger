@@ -5,6 +5,8 @@
 [Chrome Logger](http://craig.is/writing/chrome-logger) is a Google Chrome extension for debugging server side applications in the Chrome console.
 This module is an implementation of the Chrome Logger protocol for Node.js, it allows you to log and inspect your server-side code directly in the Chrome console.
 
+![](http://i.imgur.com/KHkYtMK.png)
+
 # Installation
 
     $ npm install chromelogger
@@ -22,7 +24,7 @@ var server = http.createServer();
 server.on('request', chromelogger.middleware);
 
 server.on('request', function(req, res) {
-  res.chrome.log('Message from Node.js %s', process.version);
+  res.chrome.log('Hello from Node.js %s', process.version);
   res.end('Hello World');
 });
 
@@ -37,6 +39,8 @@ Node Chrome Logger provide several logging methods on the ServerResponse (res) o
  * `res.chrome.table`
  * `res.chrome.assert`
  * `res.chrome.count`
+ * `res.chrome.time`
+ * `res.chrome.timeEnd`
  * `res.chrome.group`
  * `res.chrome.groupEnd`
  * `res.chrome.groupCollapse`
@@ -54,7 +58,7 @@ var app = express();
 app.use(chromelogger.middleware);
 
 app.get('/', function(req, res) {
-  res.chrome.log('Message from Express.js %s', express.version);
+  res.chrome.log('Hello from Express.js %s', express.version);
   res.end('Hello World');
 });
 
