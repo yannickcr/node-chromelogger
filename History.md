@@ -1,4 +1,11 @@
 
+1.1.0 / 2013-07-05
+==================
+
+ * add console.time / console.timeEnd support
+ * add console.assert support
+ * add console.count support
+
 1.0.5 / 2013-06-25
 ==================
 
