@@ -49,6 +49,14 @@ describe('middleware', function() {
       assert.equal(typeof res.chrome.count, 'function', 'res.chrome.count missing');
     });
 
+    it('a time function', function() {
+      assert.equal(typeof res.chrome.time, 'function', 'res.chrome.time missing');
+    });
+
+    it('a timeEnd function', function() {
+      assert.equal(typeof res.chrome.timeEnd, 'function', 'res.chrome.timeEnd missing');
+    });
+
     it('a group function', function() {
       assert.equal(typeof res.chrome.group, 'function', 'res.chrome.group missing');
     });
@@ -304,6 +312,51 @@ describe('logging', function() {
     assert.equal(message[0], 'Message 1: 1');
     assert.equal(message[2], 'debug');
 
+  });
+
+  // Time
+  it('must start a timer', function() {
+
+    res.chrome.log('Starting timer');
+    res.chrome.time('Timer');
+
+    // Warning: use a private property
+    var time = res._ChromeLogger.time.Timer;
+    assert.equal(typeof time, 'object');
+    assert.equal(typeof time[0], 'number');
+    assert.equal(typeof time[1], 'number');
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert.equal(message[0], 'Starting timer', 'starting a timer must not log anything');
+  });
+
+  // TimeEnd
+  it('must not log anything if we try to stop an unknown timer', function() {
+
+    var timeReg = /^Recorded time: [0-9\.]+ms$/;
+
+    res.chrome.log('Stopping unknown timer');
+    res.chrome.timeEnd('Unknown timer');
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert.equal(message[0], 'Stopping unknown timer', 'stopping an unknown timer must not log anything');
+  });
+
+  it('must log the elapsed time between the time and timeEnd calls', function() {
+
+    var timeReg = /^Timer: [0-9\.]+ms$/;
+
+    res.chrome.timeEnd('Timer');
+
+    var data = JSON.parse(new Buffer(res._headers['x-chromelogger-data'], 'base64').toString('ascii'));
+    var message = data.rows.pop();
+    assert(timeReg.test(message[0]), 'the time message must match' + timeReg);
+    assert.equal(message[2], 'debug');
+
+    // Warning: use a private property
+    assert.equal(typeof res._ChromeLogger.time.Timer, 'undefined', 'the timer must be removed from the queue');
   });
 
   // Group

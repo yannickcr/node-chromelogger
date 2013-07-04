@@ -8,6 +8,7 @@ var test = 3;
 server.on('request', chromelogger.middleware);
 
 server.on('request', function(req, res) {
+  res.chrome.time('Time Message');
   res.chrome.log('Simple message');
   res.chrome.log('Message', 'with', 4, 'parameters');
   res.chrome.log('Message from Node.js %s', process.version);
@@ -39,6 +40,7 @@ server.on('request', function(req, res) {
   res.chrome.log('Message 1');
   res.chrome.log('Message 2');
   res.chrome.groupEnd();
+  res.chrome.timeEnd('Time Message');
   res.setHeader('Content-Type', 'application/javascript; charset=UTF-8');
   res.end();
   res.chrome.log('Attempt to log when the headers were already sent');
