@@ -335,9 +335,6 @@ describe('logging', function() {
 
   // TimeEnd
   it('must not log anything if we try to stop an unknown timer', function() {
-
-    var timeReg = /^Recorded time: [0-9\.]+ms$/;
-
     res.chrome.log('Stopping unknown timer');
     res.chrome.timeEnd('Unknown timer');
 
