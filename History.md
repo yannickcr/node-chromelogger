@@ -1,4 +1,11 @@
 
+1.1.1 / 2013-10-20
+==================
+
+ * fix global variable leak
+ * fix tests under Windows
+ * update mocha to latest version
+
 1.1.0 / 2013-07-05
 ==================
 

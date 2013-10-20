@@ -1,6 +1,6 @@
 {
   "name": "chromelogger",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Log and inspect your server-side code in the Chrome console using Chrome Logger",
   "keywords": [
     "chrome",
