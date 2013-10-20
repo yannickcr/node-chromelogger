@@ -10,6 +10,7 @@
     "express",
     "middleware"
   ],
+  "homepage": "https://github.com/yannickcr/node-chromelogger",
   "main": "./lib/chromelogger.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha ./test/test.js",
@@ -28,6 +29,9 @@
   },
   "engines": {
     "node": ">=0.4.0"
+  },
+  "bugs": {
+    "url": "https://github.com/yannickcr/node-chromelogger/issues"
   },
   "repository": {
     "type": "git",
