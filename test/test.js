@@ -137,7 +137,7 @@ describe('logging', function() {
 
   it('must set the rows', function() {
 
-    var lineReg = /node-chromelogger\/test\/test\.js:[0-9]+:[0-9]+$/;
+    var lineReg = /node-chromelogger(\/|\\)test(\/|\\)test\.js:[0-9]+:[0-9]+$/;
 
     assert.equal(typeof data.rows, 'object');
 
@@ -397,7 +397,7 @@ describe('logging', function() {
   // Log in a loop
   it('must set a backtrace for only the first log message in a loop', function() {
 
-    var lineReg = /node-chromelogger\/test\/test\.js:[0-9]+:[0-9]+$/;
+    var lineReg = /node-chromelogger(\/|\\)test(\/|\\)test\.js:[0-9]+:[0-9]+$/;
 
     for(var i = 0; i < 2; i++) {
       res.chrome.log('Test');

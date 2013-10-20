@@ -13,7 +13,7 @@
   "homepage": "https://github.com/yannickcr/node-chromelogger",
   "main": "./lib/chromelogger.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha ./test/test.js",
+    "test": "node ./node_modules/mocha/bin/mocha ./test/test.js",
     "blanket": {
      "pattern": [ "/lib/chromelogger.js" ]
     }
