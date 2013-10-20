@@ -1,3 +1,5 @@
+'use strict';
+
 var
   assert = require('assert'),
   chromelogger = require('../lib/chromelogger'),
