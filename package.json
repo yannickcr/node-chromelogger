@@ -22,10 +22,10 @@
     "json-stringify-safe": "5.0.x"
   },
   "devDependencies": {
-    "mocha": "1.13.x",
+    "mocha": "1.14.x",
     "mocha-lcov-reporter": "0.0.x",
     "blanket": "1.1.x",
-    "coveralls": "2.3.x"
+    "coveralls": "2.5.x"
   },
   "engines": {
     "node": ">=0.4.0"
