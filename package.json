@@ -13,19 +13,21 @@
   "homepage": "https://github.com/yannickcr/node-chromelogger",
   "main": "./lib/chromelogger.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha ./test/test.js",
+    "test": "node ./node_modules/mocha/bin/mocha --reporter=spec",
     "blanket": {
-     "pattern": [ "/lib/chromelogger.js" ]
+      "pattern": [
+        "/lib/chromelogger.js"
+      ]
     }
   },
   "dependencies": {
     "json-stringify-safe": "5.0.x"
   },
   "devDependencies": {
-    "mocha": "1.14.x",
+    "mocha": "~1.15.1",
     "mocha-lcov-reporter": "0.0.x",
     "blanket": "1.1.x",
-    "coveralls": "2.5.x"
+    "coveralls": "~2.6.0"
   },
   "engines": {
     "node": ">=0.4.0"
