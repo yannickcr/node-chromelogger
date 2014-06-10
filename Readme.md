@@ -1,6 +1,6 @@
 # Node Chrome Logger
 
-[![NPM version](https://badge.fury.io/js/chromelogger.png)](https://npmjs.org/package/chromelogger) [![Build Status](https://secure.travis-ci.org/yannickcr/node-chromelogger.png)](http://travis-ci.org/yannickcr/node-chromelogger) [![Dependency Status](https://gemnasium.com/yannickcr/node-chromelogger.png)](https://gemnasium.com/yannickcr/node-chromelogger) [![Coverage Status](https://coveralls.io/repos/yannickcr/node-chromelogger/badge.png?branch=master)](https://coveralls.io/r/yannickcr/node-chromelogger?branch=master) [![Code Climate](https://codeclimate.com/github/yannickcr/node-chromelogger.png)](https://codeclimate.com/github/yannickcr/node-chromelogger)
+[![Maintenance Status][status-image]][status-url] [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][deps-image]][deps-url] [![Coverage Status][coverage-image]][coverage-url] [![Code Climate][climate-image]][climate-url]
 
 [Chrome Logger](http://craig.is/writing/chrome-logger) is a Google Chrome extension for debugging server side applications in the Chrome console.
 This module is an implementation of the Chrome Logger protocol for Node.js, it allows you to log and inspect your server-side code directly in the Chrome console.
@@ -79,4 +79,20 @@ chromelogger.on('error', function(message) {
 
 Node Chrome Logger is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yannickcr/chromelogger/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[npm-url]: https://npmjs.org/package/chromelogger
+[npm-image]: http://img.shields.io/npm/v/chromelogger.svg?style=flat
+
+[travis-url]: https://travis-ci.org/yannickcr/node-chromelogger
+[travis-image]: http://img.shields.io/travis/yannickcr/node-chromelogger/master.svg?style=flat
+
+[deps-url]: https://gemnasium.com/yannickcr/node-chromelogger
+[deps-image]: http://img.shields.io/gemnasium/yannickcr/node-chromelogger.svg?style=flat
+
+[coverage-url]: https://coveralls.io/r/yannickcr/node-chromelogger?branch=master
+[coverage-image]: http://img.shields.io/coveralls/yannickcr/node-chromelogger/master.svg?style=flat
+
+[climate-url]: https://codeclimate.com/github/yannickcr/node-chromelogger
+[climate-image]: http://img.shields.io/codeclimate/github/yannickcr/node-chromelogger.svg?style=flat
+
+[status-url]: https://github.com/yannickcr/node-chromelogger/pulse
+[status-image]: http://img.shields.io/badge/status-maintained-brightgreen.svg?style=flat

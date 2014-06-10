@@ -21,13 +21,13 @@
     }
   },
   "dependencies": {
-    "json-stringify-safe": "5.0.x"
+    "json-stringify-safe": "~5.0.0"
   },
   "devDependencies": {
-    "mocha": "~1.15.1",
-    "mocha-lcov-reporter": "0.0.x",
-    "blanket": "1.1.x",
-    "coveralls": "~2.6.0"
+    "mocha": "~1.20.1",
+    "mocha-lcov-reporter": "~0.0.1",
+    "blanket": "~1.1.6",
+    "coveralls": "~2.10.0"
   },
   "engines": {
     "node": ">=0.4.0"
